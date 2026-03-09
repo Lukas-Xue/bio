@@ -1,1137 +1,228 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <title>Lukas Profile Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Lukas Profile Page" />
-    <meta name="author" content="lmpixels" />
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lukas Xue</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1a1a1a; line-height: 1.6; background: #fafafa; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
+    header { background: #111; color: #fff; padding: 4rem 2rem 3rem; text-align: center; }
+    .header-inner { display: flex; align-items: center; justify-content: center; gap: 2rem; max-width: 700px; margin: 0 auto; }
+    .headshot { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 3px solid #333; flex-shrink: 0; }
+    .header-text { text-align: left; }
+    header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 0.3rem; }
+    header p { color: #aaa; font-size: 1.05rem; margin: 0.5rem 0 1.2rem; }
+    .links a { color: #93c5fd; margin-right: 1.2rem; font-size: 0.95rem; }
 
-    <link rel="stylesheet" href="css/reset.css" type="text/css">
-    <link rel="stylesheet" href="css/bootstrap-grid.min.css" type="text/css">
-    <link rel="stylesheet" href="css/animations.css" type="text/css">
-    <link rel="stylesheet" href="css/perfect-scrollbar.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/main.css" type="text/css">
-  </head>
+    section { max-width: 1080px; margin: 0 auto; padding: 2.5rem 2rem; }
+    section h2 { font-size: 1.5rem; margin-bottom: 1.4rem; padding-bottom: 0.4rem; border-bottom: 2px solid #e5e7eb; }
 
-  <body>
-    <!-- Animated Background -->
-    <div class="lm-animated-bg" style="background-image: url(img/main_bg.png);"></div>
-    <!-- /Animated Background -->
+    .timeline { position: relative; margin-left: 32px; padding-left: 36px; border-left: 2px solid #d1d5db; }
+    .tl-item { position: relative; margin-bottom: 1.6rem; }
+    .tl-logo { position: absolute; left: -56px; top: 0; width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 2px solid #d1d5db; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .tl-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .tl-logo.padded img { width: 30px; height: 30px; }
+    .tl-date { font-size: 0.8rem; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+    .tl-title { font-size: 1.05rem; font-weight: 600; margin: 0.1rem 0; }
+    .tl-org { font-size: 0.9rem; color: #4b5563; }
+    .tl-desc { font-size: 0.87rem; color: #555; line-height: 1.5; margin-top: 0.2rem; }
 
-    <!-- Loading animation -->
-    <div class="preloader">
-      <div class="preloader-animation">
-        <div class="preloader-spinner">
+    .tl-children { margin-top: 1rem; margin-left: 12px; padding-left: 24px; border-left: 2px solid #e5e7eb; }
+    .tl-child { position: relative; margin-bottom: 1rem; }
+    .tl-child:last-child { margin-bottom: 0; }
+    .tl-child-logo { position: absolute; left: -40px; top: 0; width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 2px solid #e5e7eb; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .tl-child-logo img { width: 26px; height: 26px; object-fit: contain; }
+    .tl-child .tl-date { font-size: 0.75rem; }
+    .tl-child .tl-title { font-size: 0.95rem; }
+    .tl-child .tl-org { font-size: 0.85rem; }
+    .tl-child .tl-desc { font-size: 0.83rem; }
+
+    .tl-list { margin-top: 0.6rem; padding-left: 1rem; }
+    .tl-list-label { font-size: 0.8rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.25rem; }
+    .tl-list ul { list-style: none; padding: 0; }
+    .tl-list li { font-size: 0.85rem; color: #555; margin-bottom: 0.3rem; padding-left: 0.9rem; position: relative; }
+    .tl-list li::before { content: '→'; position: absolute; left: 0; color: #9ca3af; }
+    .tl-list li .meta { font-size: 0.78rem; color: #9ca3af; }
+    .oss-logo { height: 1.6em; vertical-align: middle; margin-right: 0.3rem; padding: 0.15em 0.3em; background: #1a1a1a; border: 1px solid #333; border-radius: 4px; }
+
+    /* Certifications */
+    .certs { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+    .cert { text-align: center; width: 120px; }
+    .cert img { width: 100px; height: 100px; }
+    .cert-name { font-size: 0.78rem; color: #555; margin-top: 0.3rem; line-height: 1.3; }
+    .cert-date { font-size: 0.72rem; color: #9ca3af; }
+
+    footer { text-align: center; padding: 2rem; font-size: 0.82rem; color: #9ca3af; }
+
+    @media (max-width: 600px) {
+      header { padding: 2.5rem 1.2rem 2rem; }
+      header h1 { font-size: 1.8rem; }
+      section { padding: 2rem 1rem; }
+      .timeline { margin-left: 24px; padding-left: 28px; }
+      .tl-logo { left: -46px; width: 34px; height: 34px; }
+      .tl-logo img { width: 30px; height: 30px; object-fit: contain; }
+      .tl-children { margin-left: 8px; padding-left: 20px; }
+      .tl-child-logo { left: -34px; width: 26px; height: 26px; }
+      .tl-child-logo img { width: 22px; height: 22px; object-fit: contain; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img src="img/myself.jpeg" alt="Lukas Xue" class="headshot">
+    <div class="header-text">
+      <h1>Lukas (Renhao) Xue</h1>
+      <p>Machine Learning Engineer @ AWS Generative AI Innovation Center<br>MSIS Candidate @ Trine University · B.S. in CS @ Emory University</p>
+      <div class="links">
+        <a href="https://github.com/Lukas-Xue">GitHub</a>
+        <a href="https://www.linkedin.com/in/lukas-xue/">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=oaIhxugAAAAJ&hl=en&authuser=1">Google Scholar</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <h2>Experience &amp; Education</h2>
+  <div class="timeline">
+
+    <!-- AWS -->
+    <div class="tl-item">
+      <div class="tl-logo"><img src="img/aws.png" alt="AWS"></div>
+      <div class="tl-date">Feb 2023 – Present</div>
+      <div class="tl-title">Machine Learning Engineer</div>
+      <div class="tl-org">Amazon Web Services</div>
+      <div class="tl-desc">Progressed through multiple AWS AI/ML teams. Promoted to SDE II in April 2025.</div>
+
+      <div class="tl-children">
+        <div class="tl-child">
+          <div class="tl-child-logo"><img src="img/trine.jpg" alt="Trine"></div>
+          <div class="tl-date">Aug 2025 – Present</div>
+          <div class="tl-title">M.S. in Information Studies (MSIS) · Part-time</div>
+          <div class="tl-org">Trine University</div>
+          <div class="tl-desc">Pursuing a Master of Science in Information Studies part-time alongside full-time MLE work. Focus on data systems, information architecture, and applied research.</div>
+        </div>
+        <div class="tl-child">
+          <div class="tl-child-logo"><img src="img/aws.png" alt="AWS"></div>
+          <div class="tl-date">May 2025 – Present</div>
+          <div class="tl-title">MLE · Custom Model Optimization (CMO)</div>
+          <div class="tl-org">AWS Generative AI Innovation Center</div>
+          <div class="tl-desc">Leading R&D in model customization — SFT, Reinforcement Learning (GRPO, DPO), and model steering. Focus on robustness, explainability, and cost-effectiveness for enterprise LLM deployments.</div>
+          <div class="tl-list">
+            <div class="tl-list-label">Open Source</div>
+            <ul>
+              <li><a href="https://github.com/Lukas-Xue/nanoLLaDA"><img src="img/nanollada.png" alt="nanoLLaDA" class="oss-logo">nanoLLaDA</a> — Minimal masked diffusion language model (~500 lines). Pretraining &amp; generation for LLaDA. <span class="meta"><img src="https://img.shields.io/github/stars/Lukas-Xue/nanoLLaDA?style=social" alt="stars" style="height:1.6em;vertical-align:-0.3em;margin-left:0.3rem"></span></li>
+              <li><a href="https://github.com/awslabs/mcp/tree/main/src/mcp-lambda-handler">mcp-lambda-handler</a> — Serverless MCP HTTP handler for AWS Lambda with pluggable session management. <span class="meta">awslabs/mcp · Python</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-child">
+          <div class="tl-child-logo"><img src="img/aws.png" alt="AWS"></div>
+          <div class="tl-date">Aug 2024 – May 2025</div>
+          <div class="tl-title">SDE → SDE II · Bedrock Model Customization</div>
+          <div class="tl-org">AWS</div>
+          <div class="tl-desc">Led development of Supervised Fine-Tuning for LLMs as a managed service in Amazon Bedrock. Built the end-to-end pipeline for customers to customize foundation models on their own data.</div>
+        </div>
+        <div class="tl-child">
+          <div class="tl-child-logo"><img src="img/aws.png" alt="AWS"></div>
+          <div class="tl-date">Apr 2024 – Aug 2024</div>
+          <div class="tl-title">SDE · SageMaker AutoPilot &amp; Canvas</div>
+          <div class="tl-org">AWS</div>
+          <div class="tl-desc">AutoML for tabular data, time-series forecasting, and language model fine-tuning. Helped make ML accessible to non-practitioners through Canvas's no-code interface.</div>
+        </div>
+        <div class="tl-child">
+          <div class="tl-child-logo"><img src="img/aws.png" alt="AWS"></div>
+          <div class="tl-date">Feb 2023 – Apr 2024</div>
+          <div class="tl-title">SDE · Managed Streaming for Apache Kafka (MSK)</div>
+          <div class="tl-org">AWS</div>
+          <div class="tl-desc">Kafka on AWS Graviton chips and MSK Express Brokers with a fully managed storage layer. Optimized performance and cost for real-time streaming workloads at scale.</div>
         </div>
       </div>
     </div>
-    <!-- /Loading animation -->
 
-    <div class="page">
-      <div class="page-content">
-
-          <header id="site_header" class="header mobile-menu-hide">
-            <div class="header-content">
-              <div class="header-photo">
-                <img src="img/main_photo.JPG" alt="Renhao (Lukas) Xue">
-              </div>
-              <div class="header-titles">
-                <h2>Lukas Xue</h2>
-                <h4>Software Engineer / AWS Certified Developer - Associate</h4>
-              </div>
-            </div>
-
-            <ul class="main-menu">
-              <li class="active">
-                <a href="#home" class="nav-anim">
-                  <span class="menu-icon lnr lnr-home"></span>
-                  <span class="link-text">Home</span>
-                </a>
-              </li>
-              <li>
-                <a href="#about-me" class="nav-anim">
-                  <span class="menu-icon lnr lnr-user"></span>
-                  <span class="link-text">About Me</span>
-                </a>
-              </li>
-              <li>
-                <a href="#resume" class="nav-anim">
-                  <span class="menu-icon lnr lnr-briefcase"></span>
-                  <span class="link-text">Professional Experiences</span>
-                </a>
-              </li>
-              <li>
-                <a href="#edu" class="nav-anim">
-                  <span class="menu-icon lnr lnr-graduation-hat"></span>
-                  <span class="link-text">Education</span>
-                </a>
-              </li>
-              <!-- <li>
-                <a href="#blog" class="nav-anim">
-                  <span class="menu-icon lnr lnr-book"></span>
-                  <span class="link-text">Blog</span>
-                </a>
-              </li> -->
-            </ul>
-
-            <div class="social-links">
-              <ul>
-                <li><a href="https://www.linkedin.com/in/lukas-xue/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                <li><a href="https://github.com/Lukas-Xue" target="_blank"><i class="fab fa-brands fa-github"></i></a></li>
-                <li><a href="https://www.instagram.com/lukass_xue/" target="_blank"><i class="fab fa-instagram"></i></a></li>
-              </ul>
-            </div>
-
-            <div class="header-buttons">
-              <a href="Resume.pdf" download="Resume" class="btn btn-primary">Download Resume</a>
-            </div>
-          </header>
-
-          <!-- Mobile Navigation -->
-          <div class="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <!-- End Mobile Navigation -->
-
-          <!-- Arrows Nav -->
-          <div class="lmpixels-arrows-nav">
-            <div class="lmpixels-arrow-right"><i class="lnr lnr-chevron-right"></i></div>
-            <div class="lmpixels-arrow-left"><i class="lnr lnr-chevron-left"></i></div>
-          </div>
-          <!-- End Arrows Nav -->
-
-          <div class="content-area">
-            <div class="animated-sections">
-              <!-- Home Subpage -->
-              <section data-id="home" class="animated-section start-page">
-                <div class="section-content vcentered">
-
-                    <div class="row">
-                      <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="title-block">
-                          <h2>Lukas Xue</h2>
-                          <div class="owl-carousel text-rotation">                                    
-                            <div class="item">
-                              <div class="sp-subtitle">Software Engineer</div>
-                            </div>
-                            
-                            <div class="item">
-                              <div class="sp-subtitle">AWS Certified Developer - Associate</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                </div>
-              </section>
-              <!-- End of Home Subpage -->
-
-              <!-- About Me Subpage -->
-              <section data-id="about-me" class="animated-section">
-                <div class="section-content">
-                  <div class="page-title">
-                    <h2>About <span>Me</span></h2>
-                  </div>
-
-                  <!-- Personal Information -->
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-7">
-                      <p>What is up! I am currently a Junior studying at Emory University majoring in Computer Science and minoring in Mathematics. As a passionate and experienced Software Development Engineer, I have designed and built multiple iOS applications / dynamic websites.<br> <br>
-                        This summer, I was an intern in AWS Managed Streaming Kafka (MSK) team. I learned a lot about Continuous Integration Continuous Deployment, software development cycle, and how to write clean code that is easy to understand. I am well prepared for what is coming next!!
-                      </p>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-5">
-                      <div class="info-list">
-                        <ul>
-                          <li>
-                            <span class="title">Age</span>
-                            <span class="value">20</span>
-                          </li>
-
-                          <li>
-                            <span class="title">Gender</span>
-                            <span class="value">Male</span>
-                          </li>
-
-                          <li>
-                            <span class="title">Race</span>
-                            <span class="value">Asian</span>
-                          </li>
-
-                          <li>
-                            <span class="title">Residence</span>
-                            <span class="value">USA</span>
-                          </li>
-
-                          <li>
-                            <span class="title">Address</span>
-                            <span class="value">Atlanta, GA</span>
-                          </li>
-
-                          <li>
-                            <span class="title">e-mail</span>
-                            <span class="value">lukas.rxue@gmail.com</span>
-                          </li>
-
-                          <li>
-                            <span class="title">Phone</span>
-                            <span class="value">+1 (470)-775-1452</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End of Personal Information -->
-
-                  <div class="white-space-50"></div>
-
-                  <!-- Services 
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                      <div class="block-title">
-                        <h3>What <span>I Do</span></h3>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="col-inner">
-                        <div class="info-list-w-icon">
-                          <div class="info-block-w-icon">
-                            <div class="ci-icon">
-                              <i class="lnr lnr-store"></i>
-                            </div>
-                            <div class="ci-text">
-                              <h4>Ecommerce</h4>
-                              <p>Pellentesque pellentesque, ipsum sit amet auctor accumsan, odio tortor bibendum massa, sit amet ultricies ex lectus scelerisque nibh. Ut non sodales.</p>
-                            </div>
-                          </div>
-                          <div class="info-block-w-icon">
-                            <div class="ci-icon">
-                              <i class="lnr lnr-laptop-phone"></i>
-                            </div><div class="ci-text">
-                              <h4>Web Design</h4>
-                              <p>Pellentesque pellentesque, ipsum sit amet auctor accumsan, odio tortor bibendum massa, sit amet ultricies ex lectus scelerisque nibh. Ut non sodales.</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="col-inner">
-                        <div class="info-list-w-icon">
-                          <div class="info-block-w-icon">
-                            <div class="ci-icon">
-                              <i class="lnr lnr-pencil"></i>
-                            </div>
-                            <div class="ci-text">
-                              <h4>Copywriting</h4>
-                              <p>Pellentesque pellentesque, ipsum sit amet auctor accumsan, odio tortor bibendum massa, sit amet ultricies ex lectus scelerisque nibh. Ut non sodales.</p>
-                            </div>
-                          </div>
-                          <div class="info-block-w-icon">
-                            <div class="ci-icon">
-                              <i class="lnr lnr-flag"></i>
-                            </div><div class="ci-text">
-                              <h4>Management</h4>
-                              <p>Pellentesque pellentesque, ipsum sit amet auctor accumsan, odio tortor bibendum massa, sit amet ultricies ex lectus scelerisque nibh. Ut non sodales.</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  End of Services -->
-
-                  <!-- Testimonials
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                      <div class="block-title">
-                        <h3>Testimonials</h3>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                      <div class="testimonials owl-carousel">
-                        <div class="testimonial">
-                          <div class="img">
-                            <img src="img/testimonials/testimonial-1.jpg" alt="Alex Smith">
-                          </div>
-                          <div class="text">
-                            <p>Vivamus at molestie dui, eu ornare orci. Curabitur vel egestas dolor. Nulla condimentum nunc sit amet urna tempus finibus. Duis mollis leo id ligula pellentesque, at vehicula dui ultrices.</p>
-                          </div>
-
-                          <div class="author-info">
-                            <h4 class="author">Julia Hickman</h4>
-                            <h5 class="company">Omni Source</h5>
-                            <div class="icon">
-                              <i class="fas fa-quote-right"></i>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="testimonial">
-                          <div class="img">
-                            <img src="img/testimonials/testimonial-2.jpg" alt="Alex Smith">
-                          </div>
-                          <div class="text">
-                            <p>Vivamus at molestie dui, eu ornare orci. Curabitur vel egestas dolor. Nulla condimentum nunc sit amet urna tempus finibus. Duis mollis leo id ligula pellentesque, at vehicula dui ultrices.</p>
-                          </div>
-
-                          <div class="author-info">
-                            <h4 class="author">Robert Watkins</h4>
-                            <h5 class="company">Endicott Shoes</h5>
-                            <div class="icon">
-                              <i class="fas fa-quote-right"></i>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="testimonial">
-                          <div class="img">
-                            <img src="img/testimonials/testimonial-3.jpg" alt="Alex Smith">
-                          </div>
-                          <div class="text">
-                            <p>Vivamus at molestie dui, eu ornare orci. Curabitur vel egestas dolor. Nulla condimentum nunc sit amet urna tempus finibus. Duis mollis leo id ligula pellentesque, at vehicula dui ultrices.</p>
-                          </div>
-
-                          <div class="author-info">
-                            <h4 class="author">Kristin Carroll</h4>
-                            <h5 class="company">Helping Hand</h5>
-                            <div class="icon">
-                              <i class="fas fa-quote-right"></i>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  End of Testimonials -->
-
-                  <!-- Clients 
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                      <div class="block-title">
-                        <h3>Cilents</h3>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                      <div class="clients owl-carousel">
-                        
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="img/clients/client-1.png" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="img/clients/client-2.png" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="img/clients/client-3.png" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="img/clients/client-4.png" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="img/clients/client-5.png" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="img/clients/client-6.png" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="img/clients/client-7.png" alt="Logo">
-                          </a>
-                        </div>
-  
-                      </div>
-                    </div>
-                  </div>
-                  End of Clients -->
-                  <!-- Pricing 
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-
-                      <div class="block-title">
-                        <h3>Pricing</h3>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class=" col-xs-12 col-sm-12 ">
-                      <div class="fw-pricing clearfix row">
-                        
-                        <div class="fw-package-wrap col-md-6 ">
-                          <div class="fw-package">
-                            <div class="fw-heading-row">
-                              <span>Silver</span>
-                            </div>
-                            
-                            <div class="fw-pricing-row">
-                              <span>$64</span>
-                              <small>per month</small>
-                            </div>
-                            
-                            <div class="fw-button-row">
-                              <a href="#" target="_self" class="btn btn-secondary">Free Trial</a>
-                            </div>
-
-                            <div class="fw-default-row">Lorem ipsum dolor</div>
-                            <div class="fw-default-row">Pellentesque scelerisque</div>
-                            <div class="fw-default-row">Morbi eu sagittis</div>
-                          </div>
-                        </div>
-     
-                        <div class="fw-package-wrap col-md-6 highlight-col ">
-                          <div class="fw-package">
-                            <div class="fw-heading-row">
-                              <span>Gold</span>
-                            </div>
-                            
-                            <div class="fw-pricing-row">
-                              <span>$128</span>
-                              <small>per month</small>
-                            </div>
-
-                            <div class="fw-button-row">
-                              <a href="#" target="_self" class="btn btn-primary">Free Trial</a>
-                            </div>
-                            
-                            <div class="fw-default-row">Lorem ipsum dolor</div>
-                            <div class="fw-default-row">Pellentesque scelerisque</div>
-                            <div class="fw-default-row">Morbi eu sagittis</div>
-                            <div class="fw-default-row">Donec non diam</div>
-                            <div class="fw-default-row"></div>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-                  End of Pricing -->
-
-
-                  <!-- Fun Facts -->
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-
-                      <div class="block-title">
-                        <h3>Fun <span>Facts</span></h3>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-4">
-                      <div class="fun-fact gray-default">
-                        <i class="lnr lnr-screen"></i>
-                        <h4>Favorite TV Show</h4>
-                        <span class="fun-fact-block-value">"Friends"</span>
-                        <span class="fun-fact-block-text"></span>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-4">
-                      <div class="fun-fact gray-default">
-                        <i class="lnr lnr-clock"></i>
-                        <h4>Average Sleeping</h4>
-                        <span class="fun-fact-block-value">9+</span>
-                        <span class="fun-fact-block-text"></span>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-4 ">
-                      <div class="fun-fact gray-default">
-                        <i class="lnr lnr-magic-wand"></i>
-                        <h4>Pet Peeve</h4>
-                        <span class="fun-fact-block-value">Being Late</span>
-                        <span class="fun-fact-block-text"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End of Fun Facts -->
-
-                </div>
-              </section>
-              <!-- End of About Me Subpage -->
-
-              <!-- Resume Subpage -->
-              <section data-id="resume" class="animated-section">
-                <div class="section-content">
-                  <div class="page-title">
-                    <h2>Experience</h2>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-7">
-
-                      <!-- <div class="block-title">
-                        <h3>Education</h3>
-                      </div>
-                      
-                      <div class="timeline timeline-second-style clearfix">
-                        <div class="timeline-item clearfix">
-                          <div class="left-part">
-                            <h5 class="item-period">2008</h5>
-                            <span class="item-company">University of Studies</span>
-                          </div>
-                          <div class="divider"></div>
-                          <div class="right-part">
-                            <h4 class="item-title">Frontend Development</h4>
-                            <p>Maecenas finibus nec sem ut imperdiet. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis ante.</p>
-                          </div>
-                        </div>
-
-                        <div class="timeline-item clearfix">
-                          <div class="left-part">
-                            <h5 class="item-period">2007</h5>
-                            <span class="item-company">University of Studies</span>
-                          </div>
-                          <div class="divider"></div>
-                          <div class="right-part">
-                            <h4 class="item-title">Graphic Design</h4>
-                            <p>Aliquam tincidunt malesuada tortor vitae iaculis. In eu turpis iaculis, feugiat risus quis, aliquet urna. Quisque fringilla mollis risus, eu pulvinar dolor.</p>
-                          </div>
-                        </div>
-                      </div> -->
-
-                      <!-- <div class="white-space-50"></div> -->
-
-                      <div class="block-title">
-                        <h3>Internships</h3>
-                      </div>
-
-                      <div class="timeline timeline-second-style clearfix">
-                        <div class="timeline-item clearfix">
-                          <div class="left-part">
-                            <h5 class="item-period">2022 Summer</h5>
-                            <span class="item-company">Amazon</span>
-                          </div>
-                          <div class="divider"></div>
-                          <div class="right-part">
-                            <h4 class="item-title">SDE Intern</h4>
-                            <p>Worked in AWS Managed Streaming Kafka (MSK) team that focused on real-time big data management. <br>Developed scalable, extensible, and highly available canaries to detect early service failures and emit latency metrics using AWS Serverless technology stack such as Step Function, Lambda Function, and CloudWatch</p>
-                            <!-- <p>Worked as a Software Development Engineer in AWS Comprehend team. <br>
-                            Delivered a AI platform as an AWS service that have been used by over 10,000 customers.</p> -->
-                          </div>
-                        </div>
-
-                        <div class="timeline-item clearfix">
-                          <div class="left-part">
-                            <h5 class="item-period">2021 Summer</h5>
-                            <span class="item-company">Maersk</span>
-                          </div>
-                          <div class="divider"></div>
-                          <div class="right-part">
-                            <h4 class="item-title">SDE Intern</h4>
-                            <p> Worked as a Software Development Engineer in Web Dev team. 
-                              Renovated the real-time tracking website. 
-                            </p>
-                          </div>
-                        </div>
-                        
-                        <div class="timeline-item clearfix">
-                          <div class="left-part">
-                            <h5 class="item-period">Jan. 2021 - Jan. 2022</h5>
-                            <span class="item-company">Emory University</span>
-                          </div>
-                          <div class="divider"></div>
-                          <div class="right-part">
-                            <h4 class="item-title">CS Lab Representative</h4>
-                            <p>Built and maintained a SQL equipment database. </p>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-
-                    <!-- Skills & Certificates -->
-                    <div class="col-xs-12 col-sm-5">
-                      <!-- Coding Skills -->
-                      <div class="block-title">
-                        <h3>Coding <span>Skills</span></h3>
-                      </div>
-
-                      <div class="skills-info skills-second-style">
-                        <!-- Skill 5 -->
-                        <div class="skill clearfix">
-                          <h4>Python</h4>
-                          <div class="skill-value">95%</div>
-                        </div>
-                        <div class="skill-container skill-1">
-                          <div class="skill-percentage"></div>
-                        </div>
-                        <!-- End of Skill 5 -->
-
-                        <!-- Skill 6 -->
-                        <div class="skill clearfix">
-                          <h4>Java</h4>
-                          <div class="skill-value">95%</div>
-                        </div>
-                        <div class="skill-container skill-1">
-                          <div class="skill-percentage"></div>
-                        </div>
-                        <!-- End of Skill 6 -->
-                        
-                        <!-- Skill 7 -->
-                        <div class="skill clearfix">
-                          <h4>C</h4>
-                          <div class="skill-value">85%</div>
-                        </div>
-                        <div class="skill-container skill-2">
-                          <div class="skill-percentage"></div>
-                        </div>
-                        <!-- End of Skill 7 -->
-                        
-                        <!-- Skill 8 -->
-                        <div class="skill clearfix">
-                          <h4>PHP</h4>
-                          <div class="skill-value">75%</div>
-                        </div>
-                        <div class="skill-container skill-3">
-                          <div class="skill-percentage"></div>
-                        </div>
-                        <!-- End of Skill 8 -->
-
-                        <!-- Skill 9 -->
-                        <div class="skill clearfix">
-                          <h4>JavaScript</h4>
-                          <div class="skill-value">75%</div>
-                        </div>
-                        <div class="skill-container skill-3">
-                          <div class="skill-percentage"></div>
-                        </div>
-                        <!-- End of Skill 9 -->
-
-                        <!-- Skill 9 -->
-                        <div class="skill clearfix">
-                          <h4>Swift</h4>
-                          <div class="skill-value">65%</div>
-                        </div>
-                        <div class="skill-container skill-4">
-                          <div class="skill-percentage"></div>
-                        </div>
-                        <!-- End of Skill 9 -->
-                      </div>
-                      <!-- End of Coding Skills -->
-
-                      <div class="white-space-10"></div>
-
-                      <!-- Knowledges -->
-                      <div class="block-title">
-                        <h3>Other Skills</h3>
-                      </div>
-
-                      <ul class="knowledges">
-                        <li>SQL</li>
-                        <li>MQL</li>
-                        <li>HTML/CSS</li>
-                        <li>Stata</li>
-                        <li>R</li>
-                        <li>Linux</li>
-                        <li>Git/Github</li>
-                        <li>AWS</li>
-                        <li>Firebase</li>
-                      </ul>
-                      <!-- End of Knowledges -->
-                    </div>
-                    <!-- End of Skills & Certificates -->
-                  </div>
-
-                  <div class="white-space-50"></div>
-
-                  <!-- Certificates -->
-                  <!-- <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                      <div class="block-title">
-                        <h3>Certificates</h3>
-                      </div>
-                    </div>
-                  </div> 
-                  <div class="row"> -->
-                    <!-- Certificate 1 
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="certificate-item clearfix">
-                        <div class="certi-logo">
-                          <img src="img/clients/client-1.png" alt="logo">
-                        </div>
-                        
-                        <div class="certi-content">
-                          <div class="certi-title">
-                            <h4>Psyhology of Intertnation Design</h4>
-                          </div>
-                          <div class="certi-id">
-                            <span>Membership ID: XXXX</span>
-                          </div>
-                          <div class="certi-date">
-                            <span>19 April 2018</span>
-                          </div>
-                          <div class="certi-company">
-                            <span></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="certificate-item clearfix">
-                        <div class="certi-logo">
-                          <img src="img/clients/client-1.png" alt="logo">
-                        </div>
-                        
-                        <div class="certi-content">
-                          <div class="certi-title">
-                            <h4>Psyhology of Intertnation Design</h4>
-                          </div>
-                          <div class="certi-id">
-                            <span>Membership ID: XXXX</span>
-                          </div>
-                          <div class="certi-date">
-                            <span>19 April 2018</span>
-                          </div>
-                          <div class="certi-company">
-                            <span></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  End of Certificates -->
-                </div>
-              </section>
-              <!-- End of Resume Subpage -->
-
-
-              <!-- Begin of Education Page!! -->
-              <section data-id="edu" class="animated-section">
-                <div class="section-content">
-                  <div class="page-title">
-                    <h2>Education</h2>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-7">
-                      
-                      <div class="timeline timeline-second-style clearfix">
-                        <div class="timeline-item clearfix">
-                          <div class="left-part">
-                            <h5 class="item-period">2019 - 2023</h5>
-                            <span class="item-company">Emory University</span>
-                          </div>
-                          <div class="divider"></div>
-                          <div class="right-part">
-                            <h4 class="item-title">CS Major / Mathematics Minor</h4>
-                            <p>Member of Dean's List and Honor List with 3.94/4.00 GPA. 
-                              <br>Undergrad Teaching Assistant for CS 326 - Analysis of Algorithms.
-                              <br>Undergrad Teaching Assistant for CS 334 - Machine Learning</p>
-                          </div>
-                        </div>
-
-                        <div class="timeline-item clearfix">
-                          <div class="left-part">
-                            <h5 class="item-period">2016 - 2019</h5>
-                            <span class="item-company">Qingdao No.2 Middle School</span>
-                          </div>
-                          <div class="divider"></div>
-                          <div class="right-part">
-                            <h4 class="item-title">Engineering Concentration</h4>
-                            <p>Honor graduate with 3.95/4.00 GPA. Led the school robotics team to compete on international events multiple times and won several prizes.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Skills & Certificates -->
-                    <div class="col-xs-12 col-sm-5">
-                      <!-- Knowledges -->
-                      <div class="block-title">
-                        <h3>Related Course</h3>
-                      </div>
-
-                      <ul class="knowledges">
-                        <li>Machine Learning</li>
-                        <li>Data Mining</li>
-                        <li>Database Systems</li>
-                        <li>Data Structures and Algorithms</li>
-                        <li>Advanced Computer Architecture</li>
-                        <li>Modern Physics</li>
-                        <li>Linear Algebra</li>
-                      </ul>
-                      <!-- End of Knowledges -->
-                    </div>
-                    <!-- End of Skills & Certificates -->
-                  </div>
-
-                  <div class="white-space-50"></div>
-
-                  <!-- Certificates -->
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                      <div class="block-title">
-                        <h3>Udemy Course Certificates</h3>
-                      </div>
-                    </div>
-                  </div> 
-                  <div class="row">
-                    <!-- Certificate 1 -->
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="certificate-item clearfix">
-                        <div class="certi-logo">
-                          <img src="img/udemy/CV Cert.jpeg" alt="Computer Vision">
-                        </div>
-                        
-                        <div class="certi-content">
-                          <div class="certi-title">
-                            <h4>Computer Vision with OpenCV and Deep Learning</h4>
-                          </div>
-                          <div class="certi-date">
-                            <span>Jan. 3, 2022</span>
-                          </div>
-                          <div class="certi-company">
-                            <span>Udemy</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="certificate-item clearfix">
-                        <div class="certi-logo">
-                          <img src="img/udemy/Machine Learning Cert.jpeg" alt="Machine Learning">
-                        </div>
-                        
-                        <div class="certi-content">
-                          <div class="certi-title">
-                            <h4>Machine Learning A-Z: Hands-On Python & R in Data Science</h4>
-                          </div>
-                          <div class="certi-date">
-                            <span>Nov. 19, 2021</span>
-                          </div>
-                          <div class="certi-company">
-                            <span>Udemy</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="certificate-item clearfix">
-                        <div class="certi-logo">
-                          <img src="img/udemy/Data Science Cert.jpeg" alt="Data Science">
-                        </div>
-                        
-                        <div class="certi-content">
-                          <div class="certi-title">
-                            <h4>The Data Science Course 2021: Complete Data Science Bootcamp</h4>
-                          </div>
-                          <div class="certi-date">
-                            <span>Nov. 19, 2021</span>
-                          </div>
-                          <div class="certi-company">
-                            <span>Udemy</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="certificate-item clearfix">
-                        <div class="certi-logo">
-                          <img src="img/udemy/Web Cert.jpeg" alt="Web Design">
-                        </div>
-                        
-                        <div class="certi-content">
-                          <div class="certi-title">
-                            <h4>Web Design for Beginners: Real World Coding in HTML & CSS</h4>
-                          </div>
-                          <div class="certi-date">
-                            <span>Jul 22, 2021</span>
-                          </div>
-                          <div class="certi-company">
-                            <span>Udemy</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                <!-- End of Certificates -->
-                </div>
-              </section>
-              <!-- End of Education Subpage -->
-
-
-              <!-- Portfolio Subpage -->
-              <section data-id="portfolio" class="animated-section">
-                <div class="section-content">
-                  <div class="page-title">
-                    <h2>Portfolio</h2>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                      <!-- Portfolio Content -->
-                      <div class="portfolio-content">
-
-                        <ul class="portfolio-filters">
-                          <li class="active">
-                            <a class="filter btn btn-sm btn-link" data-group="category_all">All</a>
-                          </li>
-                          <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_detailed">Detailed</a>
-                          </li>
-                          <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_mockups">Mockups</a>
-                          </li>
-                          <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_soundcloud">SoundCloud</a>
-                          </li>
-                          <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_vimeo-videos">Vimeo Videos</a>
-                          </li>
-                          <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_youtube-videos">YouTube Videos</a>
-                          </li>
-                        </ul>
-
-                        <!-- Portfolio Grid -->
-                        <div class="portfolio-grid three-columns">
-                          
-                          <figure class="item lbaudio" data-groups='["category_all", "category_soundcloud"]'>
-                            <div class="portfolio-item-img">
-                              <img src="img/portfolio/1.jpg" alt="SoundCloud Audio" title="" />
-                              <a href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/221650664&#038;color=%23ff5500&#038;auto_play=false&#038;hide_related=false&#038;show_comments=true&#038;show_user=true&#038;show_reposts=false&#038;show_teaser=true&#038;visual=true" class="lightbox mfp-iframe" title="SoundCloud Audio"></a>
-                            </div>
-
-                            <i class="fa fa-volume-up"></i>
-                            <h4 class="name">SoundCloud Audio</h4>
-                            <span class="category">SoundCloud</span>
-                          </figure>
-
-                          <figure class="item standard" data-groups='["category_all", "category_detailed"]'>
-                            <div class="portfolio-item-img">
-                              <img src="img/portfolio/2.jpg" alt="Media Project 2" title="" />
-                              <a href="portfolio-1.html" class="ajax-page-load"></a>
-                            </div>
-
-                            <i class="far fa-file-alt"></i>
-                            <h4 class="name">Detailed Project 2</h4>
-                            <span class="category">Detailed</span>
-                          </figure>
-
-                          <figure class="item lbvideo" data-groups='["category_all", "category_vimeo-videos"]'>
-                            <div class="portfolio-item-img">
-                              <img src="img/portfolio/3.jpg" alt="Vimeo Video 1" title="" />
-                              <a href="https://player.vimeo.com/video/158284739" class="lightbox mfp-iframe" title="Vimeo Video 1"></a>
-                            </div>
-
-                            <i class="fas fa-video"></i>
-                            <h4 class="name">Vimeo Video 1</h4>
-                            <span class="category">Vimeo Videos</span>
-                          </figure>
-
-                          <figure class="item standard" data-groups='["category_all", "category_detailed"]'>
-                            <div class="portfolio-item-img">
-                              <img src="img/portfolio/4.jpg" alt="Media Project 1" title="" />
-                              <a href="portfolio-1.html" class="ajax-page-load"></a>
-                            </div>
-
-                            <i class="far fa-file-alt"></i>
-                            <h4 class="name">Detailed Project 1</h4>
-                            <span class="category">Detailed</span>
-                          </figure>
-
-                          <figure class="item lbimage" data-groups='["category_all", "category_mockups"]'>
-                            <div class="portfolio-item-img">
-                              <img src="img/portfolio/5.jpg" alt="Mockup Design 1" title="" />
-                              <a class="lightbox" title="Mockup Design 1" href="img/portfolio/full/5.jpg"></a>
-                            </div>
-
-                            <i class="far fa-image"></i>
-                            <h4 class="name">Mockup Design 1</h4>
-                            <span class="category">Mockups</span>
-                          </figure>
-
-                          <figure class="item lbvideo" data-groups='["category_all", "category_youtube-videos"]'>
-                            <div class="portfolio-item-img">
-                              <img src="img/portfolio/6.jpg" alt="YouTube Video 1" title="" />
-                              <a href="https://www.youtube.com/embed/bg0gv2YpIok" class="lightbox mfp-iframe" title="YouTube Video 1"></a>
-                            </div>
-
-                            <i class="fas fa-video"></i>
-                            <h4 class="name">YouTube Video 1</h4>
-                            <span class="category">YouTube Videos</span>
-                          </figure>
-                        </div>
-                      </div>
-                      <!-- End of Portfolio Content -->
-                    </div>
-                  </div>
-                </div>
-              </section>
-              <!-- End of Portfolio Subpage -->
-
-              <!-- Blog Subpage -->
-              <section data-id="blog" class="animated-section">
-                <div class="section-content">
-                  <div class="page-title">
-                    <h2>Blog</h2>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                      <div class="blog-masonry two-columns clearfix">
-                        
-                        <!-- Blog Post 1 -->
-                        <div class="item post-1">
-                          <div class="blog-card">
-                            <div class="media-block">
-                              <div class="category">
-                                <a href="#" title="View all posts in Design">Design</a>
-                              </div>
-                              <a href="blog-post-1.html">
-                                <img src="img/blog/blog_post_1.jpg" class="size-blog-masonry-image-two-c" alt="Why I Switched to Sketch For UI Design" title="" />
-                                <div class="mask"></div>
-                              </a>
-                            </div>
-                            <div class="post-info">
-                              <div class="post-date">05 Mar 2020</div>
-                              <a href="blog-post-1.html">
-                                <h4 class="blog-item-title">Why I Switched to Sketch For UI Design</h4>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End of Blog Post 1 -->
-
-                        <!-- Blog Post 2 -->
-                        <div class="item post-2">
-                          <div class="blog-card">
-                            <div class="media-block">
-                              <div class="category">
-                                <a href="#" title="View all posts in UI">UI</a>
-                              </div>
-                              <a href="blog-post-1.html">
-                                <img src="img/blog/blog_post_2.jpg" class="size-blog-masonry-image-two-c" alt="Best Practices for Animated Progress Indicators" title="" />
-                                <div class="mask"></div>
-                              </a>
-                            </div>
-                            <div class="post-info">
-                              <div class="post-date">23 Feb 2020</div>
-                              <a href="blog-post-1.html">
-                                <h4 class="blog-item-title">Best Practices for Animated Progress Indicators</h4>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End of Blog Post 2 -->
-
-                        <!-- Blog Post 3 -->
-                        <div class="item post-1">
-                          <div class="blog-card">
-                            <div class="media-block">
-                              <div class="category">
-                                <a href="#" title="View all posts in Design">Design</a>
-                              </div>
-                              <a href="blog-post-1.html">
-                                <img src="img/blog/blog_post_3.jpg" class="size-blog-masonry-image-two-c" alt="Designing the Perfect Feature Comparison Table" title="" />
-                                <div class="mask"></div>
-                              </a>
-                            </div>
-                            <div class="post-info">
-                              <div class="post-date">06 Feb 2020</div>
-                              <a href="blog-post-1.html">
-                                <h4 class="blog-item-title">Designing the Perfect Feature Comparison Table</h4>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End of Blog Post 3 -->
-
-                        <!-- Blog Post 4 -->
-                        <div class="item post-2">
-                          <div class="blog-card">
-                            <div class="media-block">
-                              <div class="category">
-                                <a href="#" title="View all posts in E-Commerce">UI</a>
-                              </div>
-                              <a href="blog-post-1.html">
-                                <img src="img/blog/blog_post_4.jpg" class="size-blog-masonry-image-two-c" alt="An Overview of E-Commerce Platforms" title="" />
-                                <div class="mask"></div>
-                              </a>
-                            </div>
-                            <div class="post-info">
-                              <div class="post-date">07 Jan 2020</div>
-                              <a href="blog-post-1.html">
-                                <h4 class="blog-item-title">An Overview of E-Commerce Platforms</h4>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End of Blog Post 4 -->
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-              </section>
-              <!-- End of Blog Subpage -->
-            </div>
-          </div>
-
+    <!-- Emory B.S. -->
+    <div class="tl-item">
+      <div class="tl-logo padded"><img src="img/emory.gif" alt="Emory"></div>
+      <div class="tl-date">2021 – Dec 2022</div>
+      <div class="tl-title">B.S. Computer Science, Minor in Applied Mathematics</div>
+      <div class="tl-org">Emory University</div>
+      <div class="tl-desc">Coursework in algorithms, systems, machine learning, and mathematical foundations.</div>
+
+      <div class="tl-list">
+        <div class="tl-list-label">Publications</div>
+        <ul>
+          <li><a href="https://proceedings.mlr.press/v202/ling23a.html">Deep Graph Representation Learning and Optimization for Influence Maximization</a> <span class="meta">· C. Ling, J. Jiang, J. Wang, M.T. Thai, R. Xue, J. Song, M. Qiu, L. Zhao · ICML 2023</span></li>
+        </ul>
+      </div>
+
+      <div class="tl-children">
+        <div class="tl-child">
+          <div class="tl-child-logo"><img src="img/aws.png" alt="AWS"></div>
+          <div class="tl-date">May 2022 – Aug 2022</div>
+          <div class="tl-title">SDE Intern, MSK</div>
+          <div class="tl-org">AWS</div>
+          <div class="tl-desc">Built real-time fault-tolerant data pipelines and streaming infrastructure. First exposure to distributed systems at AWS scale.</div>
+        </div>
+        <div class="tl-child">
+          <div class="tl-child-logo"><img src="img/maersk.png" alt="Maersk"></div>
+          <div class="tl-date">Summer 2021</div>
+          <div class="tl-title">Full Stack Intern</div>
+          <div class="tl-org">A.P. Moller – Maersk</div>
+          <div class="tl-desc">Modernized Maersk's shipping logistics platform. Built features for container tracking and shipment management across global supply chain operations.</div>
+        </div>
       </div>
     </div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/modernizr.custom.js"></script>
-    <script src="js/animating.js"></script>
+    <!-- Oxford College -->
+    <div class="tl-item">
+      <div class="tl-logo padded"><img src="img/emory.gif" alt="Oxford College"></div>
+      <div class="tl-date">2019 – 2021</div>
+      <div class="tl-title">Associate of Arts</div>
+      <div class="tl-org">Oxford College of Emory University</div>
+      <div class="tl-desc">Liberal arts foundation at Emory's original campus before transitioning to Atlanta for upper-division CS coursework.</div>
+    </div>
 
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+  </div>
+</section>
 
-    <script src='js/perfect-scrollbar.min.js'></script>
-    <script src='js/jquery.shuffle.min.js'></script>
-    <script src='js/masonry.pkgd.min.js'></script>
-    <script src='js/owl.carousel.min.js'></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
+<section>
+  <h2>Certifications</h2>
+  <div class="certs">
+    <a class="cert" href="https://www.credly.com/badges/2393c2ec-cbb3-4bd0-9d62-67e5ff3eee07">
+      <img src="img/cert-ai-foundational.png" alt="AWS AI Foundational">
+      <div class="cert-name">AWS AI Foundational (L100)</div>
+      <div class="cert-date">Dec 2025</div>
+    </a>
+    <a class="cert" href="https://www.credly.com/badges/2087155b-ece9-48be-9369-00659d0ddb24">
+      <img src="img/cert-ai-practitioner.png" alt="AWS AI Practitioner">
+      <div class="cert-name">AWS Certified AI Practitioner</div>
+      <div class="cert-date">Aug 2025</div>
+    </a>
+    <a class="cert" href="https://www.credly.com/badges/da01d1d9-f985-4225-a76b-28f381bffb70">
+      <img src="img/cert-ml-engineer.png" alt="AWS ML Engineer">
+      <div class="cert-name">AWS Certified ML Engineer – Associate</div>
+      <div class="cert-date">May 2025</div>
+    </a>
+    <a class="cert" href="https://www.credly.com/badges/4bd49192-1684-4853-ae6f-920f9a3fd506">
+      <img src="img/cert-ml-specialty.png" alt="AWS ML Specialty">
+      <div class="cert-name">AWS Certified ML – Specialty</div>
+      <div class="cert-date">Apr 2023</div>
+    </a>
+    <a class="cert" href="https://www.credly.com/badges/78e1f5ea-bb7a-493f-a39c-80c116ef7edb">
+      <img src="img/cert-developer.png" alt="AWS Developer Associate">
+      <div class="cert-name">AWS Certified Developer – Associate</div>
+      <div class="cert-date">May 2022</div>
+    </a>
+  </div>
+</section>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrDf32aQTCVENBhFJbMBKOUTiUAABtC2o"></script>
-    <script src="js/jquery.googlemap.js"></script>
-    <script src="js/validator.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+<footer>&copy; 2026 Lukas Xue</footer>
+
+</body>
 </html>
